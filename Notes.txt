@@ -1,0 +1,17 @@
+
+- Main Classes:
+    - Used for reminders, events and chores:
+        add 
+        show
+        remove
+
+    - requires:
+        meal, water and break reminders.
+        Not exlicityly requireing user input
+
+- All calander events and remidners are stored in a ICS file  for the user to add to their  events
+
+- whats left:
+- healthy living reminders(water,food, social, breaks)
+- chores
+- event reoccurrence 
