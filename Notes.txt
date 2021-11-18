@@ -14,4 +14,4 @@
 - whats left:
 - healthy living reminders(water,food, social, breaks)
 - chores
-- event reoccurrence 
+- event reoccurrence (didnt think it was necessary as the code was built to last for a week)

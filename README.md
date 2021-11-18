@@ -7,7 +7,7 @@ pip3 install -r requirements.txt
 pyhton3 main.py --help
 
 python3 main.py --ics ./life.ics events add --name="csci 354" --begin="2021-11-08 09:00:00" --end="2021-11-08 10:00:00"
-python3 main.py --ics ./life.ics events show
+
 python3 main.py --ics ./life.ics events remove --uid="703c34cf-d681-4271-bd6b-24ab541e3a8a@703c.org"
 
 python3 main.py --ics ./life.ics reminders show
