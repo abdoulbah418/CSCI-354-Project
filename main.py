@@ -102,7 +102,7 @@ def remove(obj, uid):
 @cli.group()
 @click.pass_context
 def reminders(ctx):
-    """ Reminders (Chores, Water, ) """
+    """ Reminders (Chores, Water, Mental) """
     click.echo("reminders")
 
 
@@ -155,71 +155,6 @@ def remove(obj, uid):
     
     obj['calendar'].todos.remove(todo_to_be_removed)
     save_ics(obj['calendar'], obj['ics_path'])
-
-
-
-
-
-
-# CHORE MANAGER SUB COMMAND
-# This function houses the sub comands which are show, add, remove, and complete
-@cli.group()
-@click.pass_context
-def chores(ctx):
-    """ Chores """
-    click.echo("chores")
-
-
-# this command print the current chore in the calnedar object in a pretty format
-@chores.command()
-@click.pass_obj
-def show(obj):
-    x = PrettyTable()
-    x.field_names = ["UID", "Name", "Time", "Completed"]
-    for todo in obj['calendar'].todos:
-        x.add_row([todo.uid, todo.name, todo.dtstamp, todo.completed])
-    click.echo(x)
-
-# this command complete a reminder task that was added to the chore database 
-@chores.command()
-@click.option('--uid', required=True)
-@click.pass_obj
-def complete(obj, uid):
-    todo_to_be_completed = None
-    for todo in obj['calendar'].todos:
-        if todo.uid == uid:
-            todo_to_be_completed = todo
-    if todo_to_be_completed == None:
-        click.echo("Could not find the todo")
-    else:
-        todo_to_be_completed.completed = datetime.now()
-        save_ics(obj['calendar'], obj['ics_path'])
-
-
-# this command add a chore to the calendar and save it to the database and take the option flags name begin and end to consturct the reminder event
-@chores.command()
-@click.option('--name', required=True)
-@click.option('--time', type=click.DateTime(), required=True)
-@click.pass_obj
-def add(obj, name, time):
-    t = Todo(name=name, uid=str(uuid.uuid4()), due=time)
-    obj['calendar'].todos.add(t)
-    save_ics(obj['calendar'], obj['ics_path'])
-
-
-# this command removes based on the uid provided to provide accuracy
-@chores.command()
-@click.option('--uid', required=True)
-@click.pass_obj
-def remove(obj, uid):
-    todo_to_be_removed = None
-    for todo in obj['calendar'].todos:
-        if todo.uid == uid:
-            todo_to_be_removed = todo
-    
-    obj['calendar'].todos.remove(todo_to_be_removed)
-    save_ics(obj['calendar'], obj['ics_path'])
-
 
 
 
